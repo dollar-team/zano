@@ -38,14 +38,18 @@ add_subdirectory(miniupnp/miniupnpc)
 
 set_property(TARGET libminiupnpc-static PROPERTY FOLDER "contrib")
 set_property(TARGET zlibstatic PROPERTY FOLDER "contrib")
-set_property(TARGET mdbx PROPERTY FOLDER "contrib")
+if(NOT DISABLE_MDBX)
+  set_property(TARGET mdbx PROPERTY FOLDER "contrib")
+  set_property(TARGET mdbx_chk mdbx_copy mdbx_dump mdbx_load mdbx_stat PROPERTY FOLDER "unused")
+endif()
 set_property(TARGET lmdb PROPERTY FOLDER "contrib")
 
 if( NOT DISABLE_TOR)
   set_property(TARGET tor-connect PROPERTY FOLDER "contrib")
 endif()
 
-set_property(TARGET upnpc-static mdbx_chk mdbx_copy mdbx_dump mdbx_load mdbx_stat PROPERTY FOLDER "unused")
+
+set_property(TARGET upnpc-static PROPERTY FOLDER "unused")
 
 if(MSVC)
   #set_property(TARGET ntdll_extra_target PROPERTY FOLDER "unused")
